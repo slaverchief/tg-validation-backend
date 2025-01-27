@@ -1,7 +1,7 @@
 import json
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse
-from .models import TGuser
+from django.http import HttpResponse, JsonResponse
+from .models import *
 
 def check_user(request):
     user = json.loads(request.body.decode('utf-8')).get('user')
@@ -10,3 +10,6 @@ def check_user(request):
         return HttpResponse(status=200)
     except ObjectDoesNotExist:
         return HttpResponse(status=404)
+
+def get_groups(request):
+    return JsonResponse([g.tgid for g in Groups.objects.all()], safe=False)
