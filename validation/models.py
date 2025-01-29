@@ -9,7 +9,8 @@ class TGuser(models.Model):
 
 class Chat(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    chatid = models.CharField(max_length=100, unique=True, db_index=True)
+    chatid = models.CharField(max_length=100, db_index=True)
+    topic_id = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name

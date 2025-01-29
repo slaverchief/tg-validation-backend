@@ -11,5 +11,9 @@ def check_user(request):
     except ObjectDoesNotExist:
         return HttpResponse(status=404)
 
+def get_chats(request, group_id):
+    group = Group.objects.get(pk=group_id)
+    return JsonResponse([(chat.chatid, chat.topic_id) for chat in group.chats.all()], safe=False)
+
 def get_groups(request):
-    return JsonResponse([g.tgid for g in Groups.objects.all()], safe=False)
+    return JsonResponse([(group.pk, group.name) for group in Group.objects.all()], safe=False)
