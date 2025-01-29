@@ -18,6 +18,7 @@ class Chat(models.Model):
     class Meta:
         verbose_name_plural = "Чаты"
         verbose_name = "Чат"
+        constraints = [models.UniqueConstraint(fields=['chatid', 'topic_id'], name='unique_chat')]
 
 class Group(models.Model):
     name = models.CharField(max_length=100, unique=True)
